@@ -5,6 +5,7 @@
     <title>Title</title>
     <script type='text/javascript' src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type='text/javascript' src="https://res.wx.qq.com/open/js/cloudbase/1.1.0/cloud.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 <body>
 hahahahh
@@ -14,55 +15,53 @@ hahahahh
     let desc = "关于新冠疫苗还有哪些疑问？快来提问吧";
     let imgUrl = "https://www.sztv.com.cn/huodong/sj/api/web/statics/images/20220507/share.png";
 
-    $(document).ready(async function () {
-        const res = await cloud.getJSSDKSignature({
-            url: 'https://service-1934671-1311970024.ap-shanghai.run.tcloudbase.com/'
-        })
-        console.log(res);
+    const res = await cloud.getJSSDKSignature({
+        url: 'https://service-1934671-1311970024.ap-shanghai.run.tcloudbase.com/'
+    })
+    console.log(res);
 
-        wx.config({
-            appId: 'wx1d6e9fa7645660fe', // 必填，公众号的唯一标识
-            timestamp: res.timestamp + '', // 必填，生成签名的时间戳
-            nonceStr: res.nonceStr, // 必填，生成签名的随机串
-            signature: res.signature,// 必填，签名
-            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
-        })
-        wx.ready(function(){
-            wx.checkJsApi({
-                jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"],
-                success:function(res){}
-            });
-            wx.onMenuShareTimeline({
-                title: title, // 分享标题
-                link: link,
-                imgUrl:imgUrl, // 分享图标
-                success: function () {
-                    // 用户确认分享后执行的回调函数
-                    console.log("分享成功");
-                },
-                cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                    console.log("分享失败");
-                }
-            });
-            wx.onMenuShareAppMessage({
-                title: title, // 分享标题
-                desc:desc, // 分享描述
-                link: link,
-                imgUrl: imgUrl, // 分享图标
-                type: '', // 分享类型,music、video或link，不填默认为link
-                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                success: function () {
-                    // 用户确认分享后执行的回调函数
-                },
-                cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                }
-            });
+    wx.config({
+        appId: 'wx1d6e9fa7645660fe', // 必填，公众号的唯一标识
+        timestamp: res.timestamp + '', // 必填，生成签名的时间戳
+        nonceStr: res.nonceStr, // 必填，生成签名的随机串
+        signature: res.signature,// 必填，签名
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+    })
+    wx.ready(function(){
+        wx.checkJsApi({
+            jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"],
+            success:function(res){}
         });
-        wx.error(function(res){
-            console.log(res);
+        wx.onMenuShareTimeline({
+            title: title, // 分享标题
+            link: link,
+            imgUrl:imgUrl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                console.log("分享成功");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+                console.log("分享失败");
+            }
         });
+        wx.onMenuShareAppMessage({
+            title: title, // 分享标题
+            desc:desc, // 分享描述
+            link: link,
+            imgUrl: imgUrl, // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+    wx.error(function(res){
+        console.log(res);
     });
 
 </script>
