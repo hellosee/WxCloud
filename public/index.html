@@ -15,6 +15,9 @@ hahahahh
     let desc = "关于新冠疫苗还有哪些疑问？快来提问吧";
     let imgUrl = "https://www.sztv.com.cn/huodong/sj/api/web/statics/images/20220507/share.png";
 
+    cloud.init({
+        env: cloud.DYNAMIC_CURRENT_ENV
+    })
     const res = cloud.getJSSDKSignature({
         url: 'https://service-1934671-1311970024.ap-shanghai.run.tcloudbase.com/'
     })
