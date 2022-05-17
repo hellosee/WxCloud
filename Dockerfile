@@ -24,7 +24,7 @@ COPY . /app
 
 # 替换nginx、fpm、php配置
 RUN cp /app/conf/nginx.conf /etc/nginx/conf.d/default.conf \
-    && cp /app/index.html /app/public/index.html \
+    && cp /app/index.html /app/public/ \
     && mkdir -p /run/nginx \
     && chmod -R 777 /app/runtime \
 
